@@ -5,18 +5,18 @@ from sklearn.neighbors import NearestNeighbors
 import numpy as np
 import re
 
-# ------------------------
+ 
 # Load Model
-# ------------------------
+ 
 @st.cache_resource
 def load_model():
     return SentenceTransformer("all-MiniLM-L6-v2")
 
 model = load_model()
 
-# ------------------------
+ 
 # Load Role Catalog and Compute Embeddings
-# ------------------------
+ 
 @st.cache_data
 def load_roles():
     # df = pd.read_csv("roles_catalog.csv")
@@ -30,9 +30,9 @@ def load_roles():
 
 roles_df, role_embeddings, nn = load_roles()
 
-# ------------------------
+ 
 # Robust Skill Extractor
-# ------------------------
+ 
 def extract_skills(text, vocab=None):
     if vocab is None:
         vocab = [
@@ -48,9 +48,9 @@ def extract_skills(text, vocab=None):
             found.append(skill)
     return found
 
-# ------------------------
+ 
 # Generate 30/60/90 Learning Plan
-# ------------------------
+ 
 def generate_learning_plan(role_title, missing_skills):
     plan = {
         "30 Days": [],
@@ -71,9 +71,9 @@ def generate_learning_plan(role_title, missing_skills):
                 plan["90 Days"].append(f"Master {skill} and apply it in a portfolio project.")
     return plan
 
-# ------------------------
+ 
 # Streamlit UI
-# ------------------------
+ 
 st.title("🎯 Personalized Career & Skills Advisor")
 st.write("An AI-powered tool that maps your skills, recommends career paths, and prepares you for the evolving job market.")
 
