@@ -19,7 +19,8 @@ model = load_model()
 # ------------------------
 @st.cache_data
 def load_roles():
-    df = pd.read_csv("roles_catalog.csv")
+    # df = pd.read_csv("roles_catalog.csv")
+    df = pd.read_csv("roles_catalog_large.csv", quotechar='"', on_bad_lines='skip')
     df.fillna("", inplace=True)
     role_texts = (df["role_title"] + ". " + df["role_description"]).tolist()
     embeddings = model.encode(role_texts, convert_to_numpy=True, show_progress_bar=False)
